@@ -1,4 +1,6 @@
 import eel
+import argparse
+import numpy as np
 
 eel.init('web')
 
