@@ -22,7 +22,6 @@ def open_cam():
         return ""
     _, buffer = cv2.imencode('.jpg', frame)
     encoded = base64.b64encode(buffer).decode('utf-8')
-    print(f'------ 1 -------')
     return f'data:image/jpeg;base64,{encoded}'
 
 # @eel.expose

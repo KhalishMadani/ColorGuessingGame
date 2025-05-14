@@ -14,12 +14,9 @@ sendBtn.addEventListener('click', async () => {
     await eel.receive_data('Hello there from the web!!');
 });
 
-async function usecamera() {
+cameradBtn.addEventListener('click', async () => {
     imgCamLocation.src = await eel.open_cam()();
-}
-
-cameradBtn.onclick = async () => {
-    setInterval(usecamera(), 30);
-}
+})
+setInterval(cameradBtn.onclick, 30);
 
 // closeCamBtn.onclick = async () => await eel.close_cam()()
