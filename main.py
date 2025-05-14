@@ -1,6 +1,7 @@
 import eel
 import argparse
 import numpy as np
+import cv2
 
 eel.init('web')
 
