@@ -1,4 +1,4 @@
-# ColorGuessingGame
+# Color Guesser Game 🎨
 
 ## 📦 Installation
 
