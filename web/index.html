@@ -100,13 +100,18 @@
       background-color: darkorange !important;
       color: white;
     }
+
+    img[src=""] {
+      display: none;
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Guess The Color</h1>
     <div class="display-box">
-      <img class="cam-img" id="cam-img" alt="No Image">
+      <img class="cam-img" id="cam-img" alt="📸 press Start to play" src="">
     </div>
     <div class="controls">
       <button class="btn start" id="startcam-btn">Start</button>

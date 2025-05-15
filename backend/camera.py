@@ -3,10 +3,14 @@ import cv2
 import base64
 
 
-cam = cv2.VideoCapture(0)
 
+cam = None
 @eel.expose
 def open_cam():
+    global cam
+    if cam is None or not cam.isOpened():
+        cam = cv2.VideoCapture(0)
+
     ret, frame = cam.read()
     if not ret:
         return ""
@@ -16,4 +20,7 @@ def open_cam():
 
 @eel.expose
 def close_cam():
-    return cam.release()
+    global cam
+    if cam is not None:
+        cam.release()
+        cam = None
