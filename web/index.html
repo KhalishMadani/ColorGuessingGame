@@ -94,7 +94,7 @@
       font-weight: bold;
     }
     .option-button.red { background-color: red; }
-    .option-button.blue { background-color: blue; }
+    .option-button.white { background-color: rgb(159, 159, 171); color: #000; }
     .option-button.yellow { background-color: yellow; color: black; }
     .option-button:hover {
       background-color: darkorange !important;
@@ -111,7 +111,8 @@
   <div class="container">
     <h1>Guess The Color</h1>
     <div class="display-box">
-      <img class="cam-img" id="cam-img" alt="📸 press Start to play" src="">
+      <img class="cam-img" id="cam-img" src="">
+      <h2 id="toggle-text">Press Start To Play 📸</h2>
     </div>
     <div class="controls">
       <button class="btn start" id="startcam-btn">Start</button>
@@ -119,7 +120,7 @@
     </div>
     <div class="options">
       <button class="option-button red"><span>A</span> Red</button>
-      <button class="option-button blue"><span>B</span> Blue</button>
+      <button class="option-button white"><span>B</span> White</button>
       <button class="option-button yellow"><span>C</span> Yellow</button>
     </div>
   </div>
