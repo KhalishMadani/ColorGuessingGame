@@ -1,5 +1,7 @@
 # Color Guesser Game 🎨
 
+please note that this app is still in development, however you still can run the premature release..
+
 ## 📦 Installation
 
 Follow these steps to install the project locally
