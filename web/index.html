@@ -29,7 +29,18 @@
       height: 200px;
       margin: 20px auto;
       border-radius: 10px;
+      overflow: hidden;          /* Hides anything that overflows */
+      display: flex;             /* Centers the image */
+      justify-content: center;
+      align-items: center;
+      
+      .cam-img {
+        max-width: 100%;           /* Prevents image from overflowing horizontally */
+        max-height: 100%;          /* Prevents image from overflowing vertically */
+        object-fit: contain;       /* Keeps aspect ratio while fitting inside box */
+      }
     }
+
     .controls {
       display: flex;
       justify-content: center;
@@ -94,10 +105,12 @@
 <body>
   <div class="container">
     <h1>Guess The Color</h1>
-    <div class="display-box"></div>
+    <div class="display-box">
+      <img class="cam-img" id="cam-img" alt="No Image">
+    </div>
     <div class="controls">
-      <button class="btn start">Start</button>
-      <button class="btn stop">Stop</button>
+      <button class="btn start" id="startcam-btn">Start</button>
+      <button class="btn stop" id="closecam-btn">Stop</button>
     </div>
     <div class="options">
       <button class="option-button red"><span>A</span> Red</button>
@@ -105,5 +118,10 @@
       <button class="option-button yellow"><span>C</span> Yellow</button>
     </div>
   </div>
+
+  <!-- this script is mandatory when using eel libbrary -->
+  <script type="text/javascript" src="/eel.js"></script> 
+
+  <script src="js/index.js"></script>
 </body>
 </html>

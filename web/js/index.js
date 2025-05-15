@@ -1,18 +1,7 @@
-const h1Element = document.getElementById('h1-element');
-const getBtn = document.getElementById('get-py')
-const sendBtn = document.getElementById('send-js')
-const cameradBtn = document.getElementById('camera-btn')
+const cameradBtn = document.getElementById('startcam-btn')
 const imgCamLocation = document.getElementById('cam-img')
-const closeCamBtn = document.getElementById('close-cam-btn')
+const closeCamBtn = document.getElementById('closecam-btn')
 
-
-getBtn.addEventListener('click', async () => {
-    h1Element.innerText = await eel.sample_text()();
-});
-
-sendBtn.addEventListener('click', async () => {
-    await eel.receive_data('Hello there from the web!!');
-});
 
 cameradBtn.onclick = () => {
     setInterval( async () => { 
