@@ -12,13 +12,15 @@ def open_cam():
         cam = cv2.VideoCapture(0)
 
     ret, frame = cam.read()
+    hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
     if not ret:
         return ""
     
     height, width, _ = frame.shape
     center_x = int(width/2)
     center_y = int(height/2)
-    pixel_center = frame[center_y, center_x]
+    pixel_center = hsv_frame[center_y, center_x]
     print(f"Pixel at center: {pixel_center}")
 
     #custom circle
