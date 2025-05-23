@@ -5,9 +5,14 @@ import base64
 
 
 cam = None
+color = "undefined"
+hue_value = None
+
 @eel.expose
 def open_cam():
     global cam
+    global hue_value
+
     if cam is None or not cam.isOpened():
         cam = cv2.VideoCapture(0)
 
@@ -53,6 +58,19 @@ def open_cam():
     _, buffer = cv2.imencode('.jpg', frame)
     encoded = base64.b64encode(buffer).decode('utf-8')
     return f'data:image/jpeg;base64,{encoded}'
+
+@eel.expose
+def get_color():
+    global color
+    global hue_value
+
+    color_range = {
+        "red": [0, 5],
+        "orange": [5, 22],
+        "yellow": [22, 33],
+    }
+
+    for color_name, hue in color_range.items()
 
 @eel.expose
 def close_cam():
