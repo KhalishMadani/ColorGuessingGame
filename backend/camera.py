@@ -5,7 +5,7 @@ import base64
 
 
 cam = None
-color = "undefined"
+colors = "undefined"
 hue_value = None
 
 @eel.expose
@@ -54,6 +54,7 @@ def open_cam():
         color_frame,
         thickness
     )
+    get_color()
 
     _, buffer = cv2.imencode('.jpg', frame)
     encoded = base64.b64encode(buffer).decode('utf-8')
@@ -61,7 +62,7 @@ def open_cam():
 
 @eel.expose
 def get_color():
-    global color
+    global colors
     global hue_value
 
     color_range = {
@@ -70,7 +71,12 @@ def get_color():
         "yellow": [22, 33],
     }
 
-    for color_name, hue in color_range.items()
+    for color_name, hue in color_range.items():
+        if hue_value in hue:
+            colors = color_name
+            break
+    print(f'hue values: {hue_value}')
+    print(f'color: {colors}')
 
 @eel.expose
 def close_cam():
