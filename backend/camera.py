@@ -66,17 +66,23 @@ def get_color():
     global hue_value
 
     color_range = {
-        "red": [0, 5],
-        "orange": [5, 22],
-        "yellow": [22, 33],
+        "Merah": [0, 5],
+        "Oren": [5, 22],
+        "Kuning": [22, 33],
+        "Hijau Muda": [33, 46],
+        "Hijau": [46, 70],
+        "Biru Muda": [71, 97],
+        "Biru": [98, 128],
+        "Ungu": [129, 152],
+        "Pink": [153, 169],
     }
 
-    for color_name, hue in color_range.items():
-        if hue_value in hue:
-            colors = color_name
+    for key in color_range:
+        if hue_value >= color_range[key][0] and hue_value <= color_range[key][1]:
+            colors = key
             break
-    print(f'hue values: {hue_value}')
-    print(f'color: {colors}')
+    print(f'hue : {hue_value}, color : {colors}')
+
 
 @eel.expose
 def close_cam():
