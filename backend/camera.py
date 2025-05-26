@@ -7,12 +7,12 @@ import base64
 cam = None
 colors = "undefined"
 hue_value = None
+sat_value = None
+val_value = None
 
 @eel.expose
 def open_cam():
-    global cam
-    global hue_value
-    global colors
+    global cam, colors, hue_value, sat_value, val_value
 
     if cam is None or not cam.isOpened():
         cam = cv2.VideoCapture(0)
@@ -28,7 +28,10 @@ def open_cam():
     center_y = int(height/2)
     pixel_center = hsv_frame[center_y, center_x]
     
-    hue_value = pixel_center[0]
+    h, s, v = pixel_center
+    hue_value = int(h)
+    sat_value = int(s)
+    val_value = int(v)
 
     #custom circle
     radius = 15
@@ -39,6 +42,10 @@ def open_cam():
     b, g, r = int(pixel_center_bgr[0]), int(pixel_center_bgr[1]), int(pixel_center_bgr[2])
 
     cv2.putText(frame, colors, (18, 58), 0, 1.5, (b, g, r), 2)
+
+    text = f"{colors} | H:{hue_value} S:{sat_value} V:{val_value}"
+    cv2.putText(frame, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (b, g, r), 2)
+
 
     cv2.circle(
         frame,
@@ -56,22 +63,33 @@ def open_cam():
 @eel.expose
 def get_color():
     global colors
-    global hue_value
+    global hue_value, sat_value, val_value
+
+    if sat_value < 50 and val_value > 200:
+        colors = "Putih"
+        return
+    elif val_value < 50:
+        colors = "Hitam"
+        return
+    elif sat_value < 50:
+        colors = "Abu-abu"
+        return
 
     color_range = {
-        "Merah": [0, 5],
-        "Oren": [5, 22],
-        "Kuning": [22, 33],
-        "Hijau Muda": [33, 46],
-        "Hijau": [46, 70],
-        "Biru Muda": [71, 97],
-        "Biru": [98, 128],
-        "Ungu": [129, 152],
-        "Pink": [153, 169],
+        "Merah": (0, 10),
+        "Oren": (11, 20),
+        "Kuning": (21, 30),
+        "Hijau Muda": (31, 45),
+        "Hijau": (46, 75),
+        "Biru Muda": (76, 90),
+        "Biru": (91, 130),
+        "Ungu": (131, 150),
+        "Pink": (151, 170),
+        "Merah Tua": (171, 180)
     }
 
-    for key in color_range:
-        if hue_value >= color_range[key][0] and hue_value <= color_range[key][1]:
+    for key, (min, max) in color_range.items():
+        if min <= hue_value <= max:
             colors = key
             break
     print(f'hue : {hue_value}, color : {colors}')
