@@ -12,6 +12,7 @@ hue_value = None
 def open_cam():
     global cam
     global hue_value
+    global colors
 
     if cam is None or not cam.isOpened():
         cam = cv2.VideoCapture(0)
@@ -28,16 +29,6 @@ def open_cam():
     pixel_center = hsv_frame[center_y, center_x]
     
     hue_value = pixel_center[0]
-    color = "undefined"
-
-    if hue_value <5:
-        color = "red"
-    elif hue_value < 22:
-        color = "orange"
-    elif hue_value < 33:
-        color = "yellow"
-    else:
-        color = "violet"
 
     #custom circle
     radius = 15
@@ -46,7 +37,9 @@ def open_cam():
 
     pixel_center_bgr = frame[center_y, center_x]
     b, g, r = int(pixel_center_bgr[0]), int(pixel_center_bgr[1]), int(pixel_center_bgr[2])
-    cv2.putText(frame, color, (18, 58), 0, 1.5, (b, g, r), 2)
+
+    cv2.putText(frame, colors, (18, 58), 0, 1.5, (b, g, r), 2)
+
     cv2.circle(
         frame,
         (center_x, center_y),

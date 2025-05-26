@@ -19,11 +19,11 @@ startCamBtn.onclick = () => {
 }
 
 captureCamBtn.onclick = async () => {
-    startCamBtn.style.display = 'block';
     clearInterval(startCamInterval);
     startCamInterval = null;
     await eel.close_cam()();
     captureCamBtn.style.display = 'none';
+    startCamBtn.style.display = 'block';
 }
 
 
