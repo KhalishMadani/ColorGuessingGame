@@ -33,5 +33,6 @@ closeCamBtn.onclick = async () => {
     await eel.close_cam()();
     toggleText.style.display = 'block';
     imgCamLocation.src = '';
+    captureCamBtn.style.display = 'none';
     startCamBtn.style.display = 'block';
 }
