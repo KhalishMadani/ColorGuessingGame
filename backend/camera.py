@@ -10,6 +10,19 @@ hue_value = None
 sat_value = None
 val_value = None
 
+color_range = {
+        "merah": (0, 10),
+        "oren": (11, 20),
+        "kuning": (21, 30),
+        "hijau-muda": (31, 45),
+        "hijau": (46, 75),
+        "biru-muda": (76, 90),
+        "biru": (91, 130),
+        "ungu": (131, 150),
+        "pink": (151, 170),
+        "merah-tua": (171, 180)
+    }
+
 @eel.expose
 def open_cam():
     global cam, colors, hue_value, sat_value, val_value
@@ -44,7 +57,7 @@ def open_cam():
     cv2.putText(frame, colors, (18, 58), 0, 1.5, (b, g, r), 2)
 
     text = f"{colors} | H:{hue_value} S:{sat_value} V:{val_value}"
-    cv2.putText(frame, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (b, g, r), 2)
+    # cv2.putText(frame, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (b, g, r), 2)
 
 
     cv2.circle(
@@ -66,27 +79,14 @@ def get_color():
     global hue_value, sat_value, val_value
 
     if sat_value < 50 and val_value > 200:
-        colors = "Putih"
-        return
+        colors = "putih"
+        return colors
     elif val_value < 50:
-        colors = "Hitam"
-        return
+        colors = "hitam"
+        return colors
     elif sat_value < 50:
-        colors = "Abu-abu"
-        return
-
-    color_range = {
-        "Merah": (0, 10),
-        "Oren": (11, 20),
-        "Kuning": (21, 30),
-        "Hijau Muda": (31, 45),
-        "Hijau": (46, 75),
-        "Biru Muda": (76, 90),
-        "Biru": (91, 130),
-        "Ungu": (131, 150),
-        "Pink": (151, 170),
-        "Merah Tua": (171, 180)
-    }
+        colors = "abu-abu"
+        return colors
 
     for key, (min, max) in color_range.items():
         if min <= hue_value <= max:
@@ -94,6 +94,7 @@ def get_color():
             break
     print(f'hue : {hue_value}, color : {colors}')
 
+    return colors
 
 @eel.expose
 def close_cam():
