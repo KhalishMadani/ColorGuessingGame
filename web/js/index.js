@@ -1,10 +1,15 @@
-const bounce = document.getElementById('bouncing-balls');
+import { createLoader } from "./loader.js";
+import { createButtons, removeOptions } from "./optionButtons.js";
+
+export const selectionDiv = document.querySelector('.selection-div');
+export const loaderDiv = document.createElement('div');
+export const optionDiv = document.createElement('div');
+
 const toggleText = document.getElementById('toggle-text')
 const startCamBtn = document.getElementById('startcam-btn')
 const captureCamBtn = document.getElementById('capturecam-btn')
 const imgCamLocation = document.getElementById('cam-img')
-const closeCamBtn = document.getElementById('closecam-btn')
-const optionDiv = document.getElementById('options-id');
+const closeCamBtn = document.getElementById('closecam-btn');
 
 let startCamInterval = null;
 
@@ -63,50 +68,14 @@ const colorRange = {
     ]
 }
 
-// this function transform the color array from colorRange into rgb format
-function rgbStr([r, g, b]) {
-    return `rgb(${r}, ${g}, ${b})`
-}
 
 async function fetchColor() {
     
     const colorName = await eel.get_color()()
     console.log(colorName);
-    bounce.style.visibility = 'hidden';
+    // bounce.style.visibility = 'hidden';
+    // optionDiv.style.display = 'flex';
     return colorName
-}
-
-function optionBtn(params) {
-    const btnA = document.createElement("button")
-    const key = colorRange[params];
-    console.log('key: ', key)
-
-    btnA.textContent = params
-    btnA.className= 'option-button'
-    btnA.style.backgroundColor = rgbStr(key[0]);
-    btnA.style.color = rgbStr(key[1]);
-    optionDiv.appendChild(btnA)
-}
-
-function randomKey(obj) {
-    const keys = Object.keys(obj)
-    const randomIndex = Math.floor(Math.random() *keys.length)
-    return keys[randomIndex];
-}
-
-function createButtons() {
-    for (i=0; i<3; i++) {
-        let randomcolor = randomKey(colorRange)
-        const key = colorRange[randomcolor]
-        const newBtn = document.createElement("button")
-
-        newBtn.textContent = `${randomcolor}`
-        newBtn.className = 'option-button'
-        newBtn.style.backgroundColor = rgbStr(key[0])
-        newBtn.style.color = rgbStr(key[1])
-        optionDiv.appendChild(newBtn)
-        console.log(randomcolor)
-    }
 }
 
 
@@ -125,25 +94,26 @@ startCamBtn.onclick = () => {
 
 
 captureCamBtn.onclick = () => {
-
     // freeze the camera & show the loading bounce
     clearInterval(startCamInterval);
     startCamInterval = null;
-    bounce.style.visibility = 'visible';
+    // bounce.style.visibility = 'visible';
     eel.close_cam()();
+
+    createLoader()
 
     // fetch the color option
     setTimeout(async () => {
         const colors = await fetchColor();
+        selectionDiv.removeChild(loaderDiv)
+        createButtons(colorRange)
         // optionBtn(colors)
-        createButtons()
         // console.log(colorRange[colors])
     }, 1000);
 
     // close the camera
     captureCamBtn.style.display = 'none';
     startCamBtn.style.display = 'block';
-
 }
 
 
@@ -157,11 +127,4 @@ closeCamBtn.onclick = async () => {
     captureCamBtn.style.display = 'none';
     startCamBtn.style.display = 'block';
     removeOptions()
-}
-
-// clear buttons
-function removeOptions() {
-    while (optionDiv.firstChild) {
-        optionDiv.removeChild(optionDiv.firstChild)
-    }
 }
