@@ -70,11 +70,7 @@ const colorRange = {
 
 
 async function fetchColor() {
-    
     const colorName = await eel.get_color()()
-    console.log(colorName);
-    // bounce.style.visibility = 'hidden';
-    // optionDiv.style.display = 'flex';
     return colorName
 }
 
@@ -94,21 +90,20 @@ startCamBtn.onclick = () => {
 
 
 captureCamBtn.onclick = () => {
-    // freeze the camera & show the loading bounce
+
+    // freeze the camera
     clearInterval(startCamInterval);
     startCamInterval = null;
-    // bounce.style.visibility = 'visible';
     eel.close_cam()();
 
+    // render loader
     createLoader()
 
-    // fetch the color option
+    // fetch the color option & render buttons
     setTimeout(async () => {
         const colors = await fetchColor();
         selectionDiv.removeChild(loaderDiv)
-        createButtons(colorRange)
-        // optionBtn(colors)
-        // console.log(colorRange[colors])
+        createButtons(colorRange, colors)
     }, 1000);
 
     // close the camera
