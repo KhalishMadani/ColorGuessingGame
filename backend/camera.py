@@ -47,14 +47,14 @@ def open_cam():
     val_value = int(v)
 
     #custom circle
-    radius = 15
+    radius = 10
     color_frame = (255, 0, 0)
     thickness = 3
 
     pixel_center_bgr = frame[center_y, center_x]
     b, g, r = int(pixel_center_bgr[0]), int(pixel_center_bgr[1]), int(pixel_center_bgr[2])
 
-    cv2.putText(frame, colors, (18, 58), 0, 1.5, (b, g, r), 2)
+    # cv2.putText(frame, colors, (18, 58), 0, 1.5, (b, g, r), 2)
 
     text = f"{colors} | H:{hue_value} S:{sat_value} V:{val_value}"
     # cv2.putText(frame, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (b, g, r), 2)
