@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Guess The Color</title>
   <link rel="stylesheet" href="style/style.css">
-  <link rel="stylesheet" href="style/load_animation.css">
+  <link rel="stylesheet" href="style/notif.css">
 </head>
 
 <body>
@@ -25,31 +25,28 @@
     </div>
 
     <div class="selection-div">
-
-      <!-- bounce ball loader
-      <div class="bouncing-balls" id="bouncing-balls">
-        <div class="ball"></div>
-        <div class="ball"></div>
-        <div class="ball"></div>
-      </div>
-
-      options menu
-      <div class="options" id="options-id">
-      </div>
-      -->
-
+      <!-- load animation and options button went here -->
     </div>
 
-    <!-- <div class="options">
-      <button class="option-button red"><span>A</span> Red</button>
-      <button class="option-button white"><span>B</span> White</button>
-      <button class="option-button yellow"><span>C</span> Yellow</button>
-    </div> -->
   </div>
+
+  <!-- Popup Notification -->
+    <div id="notification-overlay" class="notification-overlay">
+        <div id="notification-popup" class="notification-popup">
+            <div class="notification-icon">
+                <span id="notification-emoji"></span>
+            </div>
+            <div class="notification-content">
+                <h3 id="notification-title"></h3>
+                <p id="notification-message"></p>
+            </div>
+            <button class="close-btn" onclick="hideNotification()">×</button>
+        </div>
+    </div>
 
   <!-- this script is mandatory when using eel libbrary -->
   <script type="text/javascript" src="/eel.js"></script>
-
+  
   <script type="module" src="js/index.js"></script>
 </body>
 

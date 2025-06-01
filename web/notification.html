@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup Notifications</title>
+    <link rel="stylesheet" href="style/notif.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Popup Notification Demo</h1>
+        
+        <div class="demo-section">
+            <h2>Click buttons to test notifications:</h2>
+            <div class="button-group">
+                <button class="btn btn-success" onclick="showNotification('success')">
+                    Show Success
+                </button>
+                <button class="btn btn-error" onclick="showNotification('error')">
+                    Show Error
+                </button>
+                <button class="btn btn-random" onclick="showRandomNotification()">
+                    Random Result
+                </button>
+            </div>
+        </div>
+
+        <!-- Quiz Example -->
+        <div class="quiz-section">
+            <h2>Quiz Example:</h2>
+            <div class="question">
+                <p>What is 2 + 2?</p>
+                <div class="quiz-options">
+                    <button class="quiz-btn" onclick="checkAnswer(3)">3</button>
+                    <button class="quiz-btn" onclick="checkAnswer(4)">4</button>
+                    <button class="quiz-btn" onclick="checkAnswer(5)">5</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Notification -->
+    <div id="notification-overlay" class="notification-overlay">
+        <div id="notification-popup" class="notification-popup">
+            <div class="notification-icon">
+                <span id="notification-emoji"></span>
+            </div>
+            <div class="notification-content">
+                <h3 id="notification-title"></h3>
+                <p id="notification-message"></p>
+            </div>
+            <button class="close-btn" onclick="hideNotification()">×</button>
+        </div>
+    </div>
+
+    <script src="js/notif.js"></script>
+</body>
+</html>

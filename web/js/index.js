@@ -103,12 +103,13 @@ captureCamBtn.onclick = () => {
     setTimeout(async () => {
         const colors = await fetchColor();
         selectionDiv.removeChild(loaderDiv)
-        createButtons(colorRange, colors)
+        createButtons(colorRange, colors);
     }, 1000);
 
     // close the camera
     captureCamBtn.style.display = 'none';
     startCamBtn.style.display = 'block';
+
 }
 
 

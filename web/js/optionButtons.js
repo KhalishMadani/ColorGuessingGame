@@ -1,4 +1,5 @@
 import { optionDiv, selectionDiv } from "./index.js";
+import { showNotification } from "./notif.js";
 
 
 function randomKey(obj) {
@@ -15,8 +16,8 @@ function rgbStr([r, g, b]) {
 // shuffle the array position without repetition
 function shuffleArray(array) {
     const result = array.slice()
-    for (let i=result.length-1; i>0; i--) {
-        const j = Math.floor(Math.random() * (i+1));
+    for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
         [result[i], result[j]] = [result[j], result[i]]
     }
     return result
@@ -42,14 +43,25 @@ export function createButtons(color_range, true_color) {
         console.log(value)
         const key = color_range[value]
         const newBtn = document.createElement("button")
-        newBtn.textContent = value
-        newBtn.className = 'option-button'
-        newBtn.style.backgroundColor = rgbStr(key[0])
-        newBtn.style.color = rgbStr(key[1])
-        optionDiv.appendChild(newBtn)
+        newBtn.id = value;
+        newBtn.textContent = value;
+        newBtn.className = 'option-button';
+        newBtn.style.backgroundColor = rgbStr(key[0]);
+        newBtn.style.color = rgbStr(key[1]);
+        newBtn.onclick = () => clickBtn(newBtn, true_color);
+        optionDiv.appendChild(newBtn);
     }
 
-    selectionDiv.appendChild(optionDiv)
+    selectionDiv.appendChild(optionDiv);
+}
+
+function clickBtn(click, true_color) {
+    console.log(`clicked: ${click.id}, color: ${true_color}`);
+    if (click.id == true_color) {
+        showNotification('success')
+    } else {
+        showNotification('error')
+    }
 }
 
 // clear buttons
