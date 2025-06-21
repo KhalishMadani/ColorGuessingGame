@@ -1,5 +1,6 @@
 import { createLoader } from "./loader.js";
 import { createButtons, removeOptions } from "./optionButtons.js";
+import { hideNotification } from "./notif.js";
 
 export const selectionDiv = document.querySelector('.selection-div');
 export const loaderDiv = document.createElement('div');
@@ -10,6 +11,7 @@ const startCamBtn = document.getElementById('startcam-btn')
 const captureCamBtn = document.getElementById('capturecam-btn')
 const imgCamLocation = document.getElementById('cam-img')
 const closeCamBtn = document.getElementById('closecam-btn');
+const hideNotifBtn = document.getElementById('hide-notification-btn');
 
 let startCamInterval = null;
 
@@ -83,9 +85,10 @@ startCamBtn.onclick = () => {
         imgCamLocation.src = await eel.open_cam()();
         toggleText.style.display = 'none';
     }, 50);
-
+    
     startCamBtn.style.display = 'none';
     captureCamBtn.style.display = 'block';
+    removeOptions()
 }
 
 
@@ -124,3 +127,5 @@ closeCamBtn.onclick = async () => {
     startCamBtn.style.display = 'block';
     removeOptions()
 }
+
+hideNotifBtn.onclick = () => {hideNotification()}

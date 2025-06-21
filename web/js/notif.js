@@ -43,7 +43,7 @@ export function showNotification(type) {
 }
 
 // Hide notification function
-function hideNotification() {
+export function hideNotification() {
     const overlay = document.getElementById('notification-overlay');
     overlay.classList.remove('show');
 }
